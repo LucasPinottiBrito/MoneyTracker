@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../static/index.css">
     <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="../static/jquery.min.js"></script>
     <title>App Tracker</title>
 </head>
 <body>
@@ -13,9 +14,32 @@
       <img src= "/static/money-bag.png" height="80" width="80"/>
       <h2 class="header_text">MONEY TRACKER</h2>
     </div>
+    <button type="button" class="menu_button">
+      <img src="../static//bars-solid.png" height="35" width="35"/>
+    </button>
   </div>
   <div class="body">
-    
+    <div class="head_info">
+      <span style="color: white; font-weight: 700;">💵 R$</span>
+      <span style="color: white; font-weight: 700;" id="saldoDebit"></span>
+    </div>
+
   </div>
+  <script>
+    function getSaldo(){
+      $.ajax({
+          url: '/saldo',
+          type: 'GET',
+          success: function(response){
+              $('#saldoDebit').text(response)
+              console.log(response)
+          },   
+          error: function(response){
+              console.log('Erro: ', response)
+          } 
+      })
+    }
+    getSaldo()
+  </script>
 </body>
 </html>
